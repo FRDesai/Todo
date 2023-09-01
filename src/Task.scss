@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
+
+$theme: #8383ff;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background: $theme
+    url("https://images.pexels.com/photos/2629233/pexels-photo-2629233.jpeg?auto=compress&cs=tinysrgb&h=1080&w=1920")
+    no-repeat center center/cover; /* Photo by Josh Hild from Pexels */
+  background-blend-mode: multiply;
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+#tasklist {
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba($theme, 0.35);
+  padding: 1.5rem;
+
+  .task-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+    background-color: rgba($theme, 0.3);
+    border-radius: 0.5rem;
+    user-select: none;
+    h1 {
+      user-select: none;
+      width: 75%;
+      height: 75%;
+    }
+    .task-icon {
+      width: 25%;
+      height: 25%;
+    }
+  }
+
+  .input-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    .input {
+      margin: 3% 0px;
+      width: 100%;
+      font: inherit;
+      padding-left: 20px;
+      border-radius: 0.5rem;
+      border: 5px solid lighten($theme, 5%);
+      &:hover,
+      &:focus {
+        border-color: lighten($theme, 2.5%);
+      }
+    }
+    .add-icon-container {
+      width: 22%;
+      .add-icon {
+        cursor: pointer;
+        width: 80px;
+        height: 100%;
+      }
+    }
+  }
+  .error {
+    padding: 0.8rem;
+
+    color: red;
+    margin: 0 1rem;
+    text-align: center;
+    user-select: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    user-select: none;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem;
+      background-color: rgba($theme, 0.3);
+      box-shadow: 0px 0px 2px white;
+      border-radius: 0.3rem;
+
+      &:hover {
+        box-shadow: 0px 0px 3px white;
+        background-color: rgba($theme, 0.35);
+      }
+
+      h3 {
+        padding-right: 1rem;
+        max-width: calc(100% - 42px);
+        width: 100%;
+        word-break: break-word;
+      }
+
+      .icon {
+        cursor: pointer;
+      }
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
