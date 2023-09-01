@@ -1,6 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTasks, deleteTasks, updateValue, editTasks } from "./taskslice.js";
+import {
+  addTasks,
+  deleteTasks,
+  updateValue,
+  editTasks,
+  completedTasks,
+} from "./taskslice.js";
 import "./Task.scss";
 import { ReactComponent as TasklistLogo } from "./assets/tasklist.svg";
 import { ReactComponent as Delete } from "./assets/delete.svg";
@@ -13,6 +19,8 @@ const TaskList = () => {
   const value = useSelector((state) => state.todo.inputValue);
   const todolist = useSelector((state) => state.todo.todoList);
   const error = useSelector((state) => state.todo.error);
+  const Iscompleted = useSelector((state) => state.todo.Iscompleted);
+
   const dispatch = useDispatch();
 
   const handleTask = () => {
@@ -23,6 +31,7 @@ const TaskList = () => {
       dispatch(addTasks());
     }
   };
+
   return (
     <div id="tasklist">
       <div className="task-header">
@@ -51,7 +60,12 @@ const TaskList = () => {
         <ul>
           {todolist.map((todo, index) => (
             <li key={index}>
-              <h3>{todo.task}</h3>
+              <input
+                type="checkbox"
+                onClick={() => dispatch(completedTasks(todo.id))}
+              />
+
+              <h3 className={Iscompleted ? "completed" : ""}>{todo.task}</h3>
               <Delete
                 className="icon"
                 onClick={() => dispatch(deleteTasks(todo.id))}

@@ -8,6 +8,7 @@ export const todoSlice = createSlice({
     editId: null,
     inputValue: "",
     error: null,
+    Iscompleted: false,
   },
   reducers: {
     addTasks: (state, action) => {
@@ -48,9 +49,17 @@ export const todoSlice = createSlice({
     updateValue: (state, action) => {
       state.inputValue = action.payload;
     },
+    completedTasks: (state, action) => {
+      const completedtodo = state.todoList.find(
+        (todo) => todo.id === action.payload
+      );
+      completedtodo.completed = !completedtodo.completed;
+      state.Iscompleted = !state.Iscompleted;
+      console.log(completedtodo.task, completedtodo.completed);
+    },
   },
 });
 
-export const { addTasks, deleteTasks, editTasks, updateValue } =
+export const { addTasks, deleteTasks, editTasks, updateValue, completedTasks } =
   todoSlice.actions;
 export default todoSlice.reducer;

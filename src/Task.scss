@@ -113,6 +113,11 @@ body {
         word-break: break-word;
       }
 
+      .completed {
+        text-decoration: line-through;
+        text-decoration-color: black;
+      }
+
       .icon {
         cursor: pointer;
       }
