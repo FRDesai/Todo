@@ -121,6 +121,9 @@ body {
       .icon {
         cursor: pointer;
       }
+      .icon.disabled {
+        display: none;
+      }
     }
 
     li:not(:last-child) {

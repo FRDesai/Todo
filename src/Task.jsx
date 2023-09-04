@@ -67,7 +67,7 @@ const TaskList = () => {
 
               <h3 className={Iscompleted ? "completed" : ""}>{todo.task}</h3>
               <Delete
-                className="icon"
+                className={`icon${editId !== null ? " disabled" : ""}`}
                 onClick={() => {
                   if (editId === null) {
                     dispatch(deleteTasks(todo.id));
