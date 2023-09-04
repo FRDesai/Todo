@@ -68,7 +68,13 @@ const TaskList = () => {
               <h3 className={Iscompleted ? "completed" : ""}>{todo.task}</h3>
               <Delete
                 className="icon"
-                onClick={() => dispatch(deleteTasks(todo.id))}
+                onClick={() => {
+                  if (editId === null) {
+                    dispatch(deleteTasks(todo.id));
+                  } else {
+                    alert("Cannot delete tasks while editing");
+                  }
+                }}
               />
               <Edit
                 className="icon"
