@@ -19,8 +19,8 @@ const TaskList = () => {
   const value = useSelector((state) => state.todo.inputValue);
   const todolist = useSelector((state) => state.todo.todoList);
   const error = useSelector((state) => state.todo.error);
-  const Iscompleted = useSelector((state) => state.todo.Iscompleted);
-
+  // const Iscompleted = useSelector((state) => state.todo.todoList.completed);
+  // console.log(Iscompleted);
   const dispatch = useDispatch();
 
   const handleTask = () => {
@@ -61,19 +61,16 @@ const TaskList = () => {
           {todolist.map((todo, index) => (
             <li key={index}>
               <input
+                className="checkbox"
                 type="checkbox"
                 onClick={() => dispatch(completedTasks(todo.id))}
               />
+              <h3 className={todo.completed ? "completed" : ""}>{todo.task}</h3>
 
-              <h3 className={Iscompleted ? "completed" : ""}>{todo.task}</h3>
               <Delete
                 className={`icon${editId !== null ? " disabled" : ""}`}
                 onClick={() => {
-                  if (editId === null) {
-                    dispatch(deleteTasks(todo.id));
-                  } else {
-                    alert("Cannot delete tasks while editing");
-                  }
+                  dispatch(deleteTasks(todo.id));
                 }}
               />
               <Edit

@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 export const todoSlice = createSlice({
   name: "todoSlice",
   initialState: {
-    todoList: [],
+    todoList: JSON.parse(localStorage.getItem("Localtask")) || [],
     editId: null,
     inputValue: "",
     error: null,
-    Iscompleted: false,
+    // Iscompleted: false,
   },
   reducers: {
-    addTasks: (state, action) => {
+    addTasks: (state) => {
       if (state.inputValue !== "") {
         state.error = null;
         if (state.editId === null) {
@@ -22,6 +22,7 @@ export const todoSlice = createSlice({
           };
           state.todoList.push(newTask);
           state.inputValue = "";
+          localStorage.setItem("Localtask", JSON.stringify(state.todoList));
         } else if (state.editId !== null) {
           const EditTask = state.todoList.find(
             (todo) => todo.id === state.editId
@@ -29,16 +30,18 @@ export const todoSlice = createSlice({
           EditTask.task = state.inputValue;
           state.inputValue = "";
           state.editId = null;
+          localStorage.setItem("Localtask", JSON.stringify(state.todoList));
         }
       } else {
         state.error = "Type something to add";
       }
     },
     deleteTasks: (state, action) => {
-      console.log(action.payload);
       state.todoList = state.todoList.filter(
         (todo) => todo.id !== action.payload
       );
+      console.log(state.todoList);
+      localStorage.setItem("Localtask", JSON.stringify(state.todoList));
     },
     editTasks: (state, action) => {
       const id = action.payload;
@@ -50,12 +53,18 @@ export const todoSlice = createSlice({
       state.inputValue = action.payload;
     },
     completedTasks: (state, action) => {
-      const completedtodo = state.todoList.find(
+      const completedTask = state.todoList.find(
         (todo) => todo.id === action.payload
       );
-      completedtodo.completed = !completedtodo.completed;
-      state.Iscompleted = !state.Iscompleted;
-      console.log(completedtodo.task, completedtodo.completed);
+
+      if (completedTask) {
+        completedTask.completed = !completedTask.completed;
+        // state.Iscompleted = !state.Iscompleted;
+        localStorage.setItem("Localtask", JSON.stringify(state.todoList));
+      }
+      // completedtodo.completed = !completedtodo.completed;
+      // state.Iscompleted = !state.Iscompleted;
+      // localStorage.setItem("Localtask", JSON.stringify(state.todoList));
     },
   },
 });
